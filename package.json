@@ -1,0 +1,30 @@
+{
+  "name": "reactpickr",
+  "version": "0.0.0",
+  "description": "Flatpickr reimplementation in react.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "react",
+    "date",
+    "time",
+    "datepicker",
+    "flatpickr"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1"
+  },
+  "devDependencies": {
+    "babel-loader": "^7.1.1",
+    "enzyme": "^2.9.1",
+    "eslint": "^4.4.1",
+    "jest": "^20.0.4",
+    "webpack": "^3.5.3",
+    "webpack-dev-server": "^2.7.1"
+  }
+}
