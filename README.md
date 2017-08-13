@@ -2,6 +2,16 @@
 
 This is a reimplementation / port of [flatpickr](https://github.com/chmln/flatpickr) to react.
 
+The main goals are:
+* CSS Compatability
+* Same functionality and behavior
+
+## Why not use [react-flatpickr](https://github.com/coderhaoxin/react-flatpickr)?
+
+For most purposes, the react-flatpickr might even be the better option. However, I have ran into some issues with the wrapping approach.
+
+Also, you might rely on two projects updating their packages to get the bugfix you need. 
+
 ## Status
 
 This is heavily work in progress. Do not use.
