@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import l10n from "../l10n/default";
 import Days from "./Days"
 import Weekdays from "./Weekdays";
+import YearControl from "./YearControl";
 
 export default class Calendar extends React.Component{
 	constructor(props){
@@ -59,18 +60,11 @@ export default class Calendar extends React.Component{
 		}
 	}
 
-	onYearScroll = (event) =>{
-		let year = this.state.currentYear;
-		if (event.deltaY < 0){
-			year++;
-		}else{
-			year--;
-		}
-		let newDate = new Date(year, this.state.currentMonth +1, 1);
+	updateYear = (value) => {
 		this.setState(
 		{
 			...this.state,
-			currentYear: newDate.getFullYear(),
+			currentYear: value,
 		});
 	}
 
@@ -79,7 +73,7 @@ export default class Calendar extends React.Component{
 			return null;
 		}
 		return(
-			<div className="flatpickr-calendar animate arrowTop open" tabIndex="0" onBlur={ this.props.collapse } > >
+			<div className="flatpickr-calendar animate arrowTop open" tabIndex="0" onBlur={ this.props.collapse } >
 				<div className="flatpickr-month">
 					<span className="flatpickr-prev-month" onClick={this.decreaseMonth}>
 						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 17">
@@ -91,11 +85,7 @@ export default class Calendar extends React.Component{
 						<span className="cur-month" title={l10n.scrollTitle} onWheel={this.onMonthScroll}>
 							{l10n.months.longhand[this.state.currentMonth]}
 						</span>
-						<div className="numInputWrapper" onWheel={this.onYearScroll} >
-							<input className="numInput cur-year"  type="text" readOnly pattern="\d*" title={l10n.scrollTitle} value={this.state.currentYear} />
-							<span className="arrowUp"/>
-							<span className="arrowDown"/>
-						</div>
+						<YearControl value={this.state.currentYear} onYearChange={this.updateYear}/>
 					</span>
 					<span className="flatpickr-next-month" onClick={this.increaseMonth}>
 						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 17">
