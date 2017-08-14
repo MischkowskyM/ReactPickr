@@ -18,11 +18,11 @@ export default class Days extends React.Component{
         const firstOfMonth = (new Date(this.props.currentYear,this.props.currentMonth, 1).getDay() - l10n.firstDayOfWeek + 7 ) % 7;
         const daysInMonth = getDaysinMonth((this.props.currentMonth + 12) % 12, this.props.currentYear);
         let prevMonthDays = getDaysinMonth((this.props.currentMonth + 12) % 12, this.props.currentYear);
-        let	dayNumber = prevMonthDays + 1 - firstOfMonth;
+        let	dayNumber = prevMonthDays - firstOfMonth;
         let dayIndex = 0;
         let days = [];
 
-        for (; dayNumber <= prevMonthDays; dayNumber++) {
+        for (; dayNumber < prevMonthDays; dayNumber++) {
             if (this.props.onlyThisMonth){
                 days.push(<span className="flatpickr-day disabled"/>)
             }else{
@@ -38,9 +38,6 @@ export default class Days extends React.Component{
 
         for (dayNumber = 1; dayNumber <= daysInMonth; dayNumber++) {
             let date = new Date(this.props.currentYear, this.props.currentMonth, dayNumber);
-            if( date.getTime() === this.props.date.getTime() ){
-                console.log(date.getTime(), this.props.date.getTime());
-            }
             days.push(
                 <Day date={date} 
                     selected={date.getTime() === this.props.date.getTime()} 
