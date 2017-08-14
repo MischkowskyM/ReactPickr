@@ -8,7 +8,7 @@ export default class ReactPickr extends React.Component{
 		placeholder: PropTypes.string,
 		enableTime: PropTypes.bool,
 		// TODO: Accept unix timestamps, ISO date strings, strings of format "YYYY-MM-DD HH:MM", "today"
-		defaultDate: PropTypes.instanceOf(Date),
+		default: PropTypes.instanceOf(Date),
 		minDate: PropTypes.instanceOf(Date),
 		maxDate: PropTypes.instanceOf(Date),
 		dateFormat: PropTypes.string,
@@ -22,22 +22,49 @@ export default class ReactPickr extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			calendarOpen: false,
+			value: this.props.default,
+			expand: false,
 			pickedDate: "",
 		}
-	}
+        this.setWrapperRef = this.setWrapperRef.bind(this);           
+        this.handleClickOutside = this.handleClickOutside.bind(this);
+    }
+
+
+    componentDidMount() {
+        document.addEventListener('mousedown', this.handleClickOutside);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClickOutside);
+    }
+
+    setWrapperRef(node) {
+        this.calendarWrapper = node;
+    }
+
+    /**
+     * Alert if clicked on outside of element
+     */
+    handleClickOutside(event) {
+        if (this.calendarWrapper && !this.calendarWrapper.contains(event.target)) {
+			if (this.state.expand ){
+				setTimeout(() => {
+					this.setState({expand: false});
+				}, 100)
+			}
+        }
+    }
 
 	openCalendar = () => {
-		this.setState({calendarOpen: true});
+		this.setState({expand: true});
 	}
-	closeCalendar = () => {
-	//	this.setState({calendarOpen: false});
-	}
+
 	handleDateChange = (date)=>{
 		this.setState({
-			calendarOpen: false,
 			value: date,
-		});
+			expand: false,
+		});		
 	}
 
 	render(){
@@ -45,12 +72,16 @@ export default class ReactPickr extends React.Component{
 			<div>
 				<input className="flatpickr flatpickr-input active" 
 					onClick={this.openCalendar}
-					onBlur={this.closeCalendar}
 					type="text"
 					placeholder={this.props.placeholder}
 					value={this.state.value ? this.state.value.toString() : ""}
 					readOnly={true} />
-				{ this.state.calendarOpen && <Calendar {...this.props} currentDate={this.state.value} onDateChange={this.handleDateChange}/> }
+				<div ref={this.setWrapperRef}>
+					<Calendar {...this.props} 
+						expand={this.state.expand}
+						currentDate={this.state.value}
+						onDateChange={this.handleDateChange}/> 
+				</div>
 			</div>
 		)
 	}

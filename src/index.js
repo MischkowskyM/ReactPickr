@@ -4,7 +4,7 @@ import ReactPickr from "./ReactPickr";
 import "./l10n/de";
 
 ReactDOM.render(
-    <ReactPickr />,
+    <ReactPickr default={new Date()}/>,
     document.getElementById("root")
 );
 
