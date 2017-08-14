@@ -24,7 +24,7 @@ export default class Days extends React.Component{
 
         for (; dayNumber < prevMonthDays; dayNumber++) {
             if (this.props.onlyThisMonth){
-                days.push(<span className="flatpickr-day disabled"/>)
+                days.push(<span className="flatpickr-day disabled"/>);
             }else{
                 let date = new Date(this.props.currentYear, this.props.currentMonth-1, dayNumber);
                 days.push(						
@@ -47,7 +47,7 @@ export default class Days extends React.Component{
 
         for (let dayNum = daysInMonth + 1; days.length % 7 !== 0; dayNum++, dayIndex++) {
             if (this.props.onlyThisMonth){
-                days.push(<span className="flatpickr-day disabled"/>)
+                days.push(<span className="flatpickr-day disabled"/>);
             }else{
                 let date =  new Date(this.props.currentYear, this.props.currentMonth + 1, dayNum - daysInMonth);
                 days.push(
@@ -68,6 +68,6 @@ export default class Days extends React.Component{
                     {this.enumerateDays()}
                 </div>
             </div>
-        )
+        );
     }
 }

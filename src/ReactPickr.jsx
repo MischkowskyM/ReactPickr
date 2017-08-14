@@ -5,18 +5,22 @@ import "./reactpickr.css";
 
 export default class ReactPickr extends React.Component{
 	static propTypes = {
+		/** Placeholder string to display in the textbox. */
 		placeholder: PropTypes.string,
-		enableTime: PropTypes.bool,
+
 		// TODO: Accept unix timestamps, ISO date strings, strings of format "YYYY-MM-DD HH:MM", "today"
 		default: PropTypes.instanceOf(Date),
+		
+		// TODO: Implement properly.
 		minDate: PropTypes.instanceOf(Date),
+		
+		// TODO: Implement properly.
 		maxDate: PropTypes.instanceOf(Date),
-		dateFormat: PropTypes.string,
-		// TODO: enable, disable
-	};
 
-	static defaultProps = {
-		enableTime: false,
+		// TODO: Implement properly.
+		dateFormat: PropTypes.string,
+
+		// TODO: enable, disable
 	};
 
 	constructor(props){

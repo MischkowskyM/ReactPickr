@@ -1,10 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import ReactPickr from "./ReactPickr";
+import ReactTimePickr from "./ReactTimePickr";
 import "./l10n/de";
 
 ReactDOM.render(
-    <ReactPickr default={new Date()}/>,
+    <div>
+        <ReactPickr default={new Date()}/>
+        <ReactTimePickr time24hour/>
+    </div>,
     document.getElementById("root")
 );
 
